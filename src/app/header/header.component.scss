@@ -1,0 +1,88 @@
+@import "../../styles.scss";
+.nav-content-container{
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    height: 0;
+    transition: all .5s ease-in-out;
+}
+.nav-content-container-active{
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    height: 92vh;
+}
+
+.header-links svg{
+    fill: black;
+    transition: all .2s ease-in-out;
+}
+.header-links svg:hover{
+    fill: $secondary;
+}
+.nav-content{
+    height: 92vh;
+    align-items: center;
+    
+    ul > li {
+        list-style: none;
+        margin-bottom: 1.5rem;
+    }
+    
+    a{
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 2.5rem;
+        transition: all .2s ease-in-out;
+    }
+    
+    a:hover {
+        color: $secondary;
+    }
+    
+}
+
+.burger {
+    cursor: pointer;
+    position: absolute;
+    right: 1.5rem;
+    border: none;
+    top: 50%;
+    height: 0.8rem;
+    width: 2.8rem;
+    transform: translateY(-50%);
+    background-color: transparent;
+  
+    &:hover:not(.burger-line--active) {
+      .burger-line-1 {
+        width: 50%;
+      }
+  
+      .burger-line-3 {
+        width: 50%;
+        transform: translateX(50%);
+      }
+    }
+  }
+  
+  .burger-line {
+    width: 2.2rem;
+    height: 0.15rem;
+    background-color: #000;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+  
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .burger-line-3 {
+    margin-bottom: 0;
+  }
+  
+  .burger-line--active {
+  
+    .burger-line-1 {
+      transform: translateY(5px) rotate(45deg);
+    }
+  
+    .burger-line-3 {
+      transform: translateY(-5px) rotate(135deg);
+    }
+  }
