@@ -11,13 +11,17 @@ export class HeaderComponent implements OnInit {
   innerWidth!: number;
   constructor() { }
 
-  ngOnInit(): void {
-    this.innerWidth = window.innerWidth;
-  }
-
+  ngOnInit(): void {}
   toggleNav() {
+    const navLinks = document.querySelectorAll('.nav-link');
     this.navBtn.nativeElement.classList.toggle('burger-line--active');
     this.navContent.nativeElement.classList.toggle('nav-content-container-active');
+    navLinks?.forEach((el) => {
+      el.addEventListener('click', () => { 
+        this.navBtn.nativeElement.classList.remove('burger-line--active');
+        this.navContent.nativeElement.classList.remove('nav-content-container-active');
+      })
+    })
   }
 
 }

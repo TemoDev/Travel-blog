@@ -1,25 +1,26 @@
-<div class="h-100 pl-5 overflow-hidden">
-    <div class="row align-items-center">
-        <div class="col-6 p-5">
-            <h1 class="display-6 fw-bold">Login</h1>
-            <p class="mb-5">Welcome! Please fill username and password to sign in into your account.</p>
-            <form class="mx-auto w-100">
-                <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                  <label for="floatingInput">Email address</label>
-                </div>
-                <div class="form-floating">
-                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                  <label for="floatingPassword">Password</label>
-                </div>
-                <button type="submit" class="btn btn-primary rounded-3 mt-5 mb-3 fw-bolder px-5">Login</button>
-            </form>
-            <a routerLink="/sign-up">You have no account yet?</a>
-        </div>
-        <div class="col-6"  *ngIf="innerWidth > 700">
-            <div class="overflow-hidden">
-                <img class="vh-100 w-100" style="object-fit: cover; object-position: center;" src="../../../assets/login-img.jpg" alt="Nature">
-            </div>
-        </div>
+<h1 class="display-6 fw-bold">Login</h1>
+<p class="mb-5">Welcome! Please fill username and password to sign in into your account.</p>
+<form class="mx-auto w-100" [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-floating mb-3">
+      <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+            <div *ngIf="!loginForm.get('email')!.valid && loginForm.get('email')!.touched" id="emailHelp" class="form-text">Please enter valid email.</div>
     </div>
+    <div class="form-floating">
+      <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+            <div *ngIf="!loginForm.get('password')!.valid && loginForm.get('password')!.touched" id="emailHelp" class="form-text">Password minimum lenght should be 6!</div>
+    </div>
+    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary rounded-3 mt-5 mb-3 fw-bolder px-5">Login</button>
+</form>
+<a routerLink="../sign-up">You have no account yet?</a>
+
+<!-- Error message -->
+<div [ngClass]="errorMessage ? 'show' : 'hide'" class="toast d-flex align-items-center hide text-white bg-danger border-0 mt-5 fade" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex justify-content-between">
+    <div class="toast-body">
+      {{ errorMessage }}
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" (click)="closeToast()"></button>
+  </div>
 </div>

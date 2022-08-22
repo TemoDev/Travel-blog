@@ -1,0 +1,17 @@
+@import '../../../styles.scss';
+input.ng-invalid.ng-touched {
+    border-color: $danger;
+}
+.ng-invalid .ng-touched:focus {
+    border-color: $danger;
+    box-shadow: none;
+    outline: 0 none;
+}
+
+.toast{
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
