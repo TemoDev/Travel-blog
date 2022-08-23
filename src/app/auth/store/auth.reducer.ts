@@ -2,18 +2,16 @@ import { createReducer, on } from "@ngrx/store";
 import * as authActions from './auth.actions';
 import * as fromApp from '../../store/app.reducer';
 
-export interface authState {
+export interface State {
     isAuthenticated: boolean;
     uid: string | null;
+    email: string | null;
     myBlog: [] | null;
 }
 
-export interface State extends fromApp.AppState {
-    auth: authState;
-}
-
-const initialState: authState = {
+const initialState: State = {
     isAuthenticated: false,
+    email: null,
     uid: null,
     myBlog: null
 }
@@ -21,9 +19,9 @@ const initialState: authState = {
 export const authReducer = createReducer(
     initialState,
     on(authActions.setUser, (state, action) => {
-        return {...state, isAuthenticated: true, uid: action.uid };
+        return {...state, isAuthenticated: true, email: action.email ,uid: action.uid };
     }),
     on(authActions.removeUser, (state) => {
-        return {...state, isAuthenticated: false, uid: null};
+        return {...state, isAuthenticated: false, email: null ,uid: null};
     })
 )

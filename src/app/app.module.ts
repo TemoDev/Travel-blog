@@ -15,7 +15,6 @@ import { appReducer } from './store/app.reducer';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ContactComponent } from './contact/contact.component';
-import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 
 @NgModule({
@@ -25,9 +24,8 @@ import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
     FooterComponent,
     HomeComponent,
     BlogComponent,
+    BlogDetailComponent,
     ContactComponent,
-    BlogEditComponent,
-    BlogDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -20,23 +20,26 @@
     height: 92vh;
     align-items: center;
     
-    ul > li {
-        list-style: none;
-        margin-bottom: 1.5rem;
-    }
-    
-    a{
-        text-decoration: none;
-        color: black;
-        font-weight: bold;
-        font-size: 2.5rem;
-        transition: all .2s ease-in-out;
-    }
-    
-    a:hover {
-        color: $secondary;
-    }
-    
+  }
+.nav-link {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+.nav-link a{
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 2.5rem;
+  transition: all .2s ease-in-out;
+}
+a{
+  color: black;
+}
+.nav-link a:hover {
+    color: $secondary;
+}
+
+.link-active{
+  color: $secondary;
 }
 
 .burger {

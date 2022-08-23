@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import * as fromAuth from '../store/auth.reducer';
 import * as authActions from '../store/auth.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,7 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   errorMessage!: string | null;
 
-  constructor(private afAuth: AngularFireAuth, private store: Store<fromAuth.State>) { }
+  constructor(private afAuth: AngularFireAuth, private store: Store<fromAuth.State>, private router: Router) { }
 
   ngOnInit(): void {
     // Find initial width of the viewport
@@ -38,7 +39,8 @@ export class SignupComponent implements OnInit {
     this.signupForm.reset();
     this.afAuth.createUserWithEmailAndPassword(email, password).then(result => {
       console.log(result);
-      this.store.dispatch(authActions.setUser({uid: result.user!.uid}))
+      this.store.dispatch(authActions.setUser({email: result.user!.email,uid: result.user!.uid}));
+      this.router.navigate(['/home']);
     }).catch(err => {
       this.errorMessage = err.message;
       console.log(this.errorMessage)
