@@ -1,12 +1,15 @@
-<div class="container-xxl">
+<div *ngIf="!isAuthenticated" class="vh-100 d-flex align-items-center justify-content-center" style="margin-top: -8vh;">
+  Please login to access dashboard
+  <a routerLink="../auth" class="ms-2">Login</a>
+</div>
+
+<div class="container-xxl" *ngIf="isAuthenticated">
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="display-4 fw-bold">Dashboard</h1>
             <button class="btn btn-success">
                 <a class="text-light text-decoration-none" routerLink="new">Add new blog</a>
             </button>
     </div>
-    <a routerLink="edit">Click to edit</a>
-
     <hr>
     <!-- Profile Info -->
     <div *ngIf="isAuthenticated" class="card w-100">
@@ -16,6 +19,23 @@
             {{userEmail}}
         </p>
         <button class="btn btn-danger" (click)="logout()">Log out</button>
+      </div>
+    </div>
+
+    <!-- Blogs -->
+    <div class="d-flex gap-3 mt-5">
+      <div class="card" style="width: 25rem;" *ngFor="let blog of (userBlogs$ | async)">
+        <div *ngIf="blog.bgImg">
+          <img [src]="blog.bgImg" class="card-img-top" [alt]="blog.title">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ blog.title }}</h5>
+          <p class="card-text">{{ blog.description }}</p>
+          <div class="d-flex gap-3">
+            <a class="btn btn-primary" (click)="selectEditBlog(blog)" routerLink="edit">Edit</a>
+            <a href="#" class="btn btn-primary">Preview</a>
+          </div>
+        </div>
       </div>
     </div>
 </div>

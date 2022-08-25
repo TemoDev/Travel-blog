@@ -6,6 +6,7 @@ import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFireModule } from "@angular/fire/compat";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AngularFireAuthModule } from "@angular/fire/compat/auth";
         CommonModule,
         ReactiveFormsModule,
         DashboardRoutingModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        AngularFireModule
     ],
     exports: [],
 })

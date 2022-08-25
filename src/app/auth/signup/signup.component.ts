@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromAuth from '../store/auth.reducer';
 import * as authActions from '../store/auth.actions';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,7 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   errorMessage!: string | null;
 
-  constructor(private afAuth: AngularFireAuth, private store: Store<fromAuth.State>, private router: Router) { }
+  constructor(private afAuth: AngularFireAuth, private store: Store<fromAuth.State>, private router: Router, private db: AngularFirestore) { }
 
   ngOnInit(): void {
     // Find initial width of the viewport
@@ -34,11 +35,22 @@ export class SignupComponent implements OnInit {
 
   onFormSubmit() {
     console.log(this.signupForm);
+    
+    // Get Form data
     const email = this.signupForm.value.email;
     const password = this.signupForm.value.password;
+    
+    // Reset Form
     this.signupForm.reset();
+    
+    // Create Firebase User
     this.afAuth.createUserWithEmailAndPassword(email, password).then(result => {
-      console.log(result);
+
+      // Create user data in firestore
+      this.db.collection('users').doc(result.user?.uid).set({
+        email: result.user?.email,
+      })
+
       this.store.dispatch(authActions.setUser({email: result.user!.email,uid: result.user!.uid}));
       this.router.navigate(['/home']);
     }).catch(err => {

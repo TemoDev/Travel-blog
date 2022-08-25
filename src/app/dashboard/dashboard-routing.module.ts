@@ -7,7 +7,7 @@ import { EditBlogComponent } from "./edit-blog/edit-blog.component";
 
 const routes: Routes = [
     {path: '', component: DashboardComponent},
-    {path: 'edit', component: EditBlogComponent},
+    {path: 'edit', component: EditBlogComponent, canActivate: [AuthGuard]},
     {path: 'new', component: CreateBlogComponent, canActivate: [AuthGuard]},
 ]
 

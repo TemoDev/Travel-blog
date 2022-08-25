@@ -1,1 +1,77 @@
-<p>edit-blog works!</p>
+<div class="container-xxl pt-3 pb-5">
+    <!-- Component title -->
+    <h1 class="fw-bold display-5 mt-5">Create new travel blog!</h1>
+
+    <!-- Blog Form -->
+    <form [formGroup]="editBlogForm" (ngSubmit)="onBlogSubmit()">
+        <!-- Blog Title -->
+        <div class="mb-3">
+          <label class="form-label">Blog title</label>
+          <input type="text" class="form-control" formControlName="blogTitle">
+          <div *ngIf="!editBlogForm.get('blogTitle')!.dirty || blogTitleLength == 0" class="form-text">Title is required</div>
+          <div *ngIf="editBlogForm.get('blogTitle')!.dirty && blogTitleLength != 0" class="form-text"> {{blogTitleLength}} / 100 charachters</div>
+        </div>
+        
+        <!-- Blog Description -->
+        <div class="mb-3">
+          <label class="form-label">Blog Description</label>
+          <textarea type="text" class="form-control" formControlName="blogDesc"></textarea>
+          <div *ngIf="!editBlogForm.get('blogDesc')!.dirty || blogDescLength == 0" class="form-text">Description is required</div>
+          <div *ngIf="editBlogForm.get('blogDesc')!.dirty && blogDescLength != 0" class="form-text">{{blogDescLength}} / 450 charachters</div>
+        </div>
+        
+        <!-- Image link -->
+        <div class="mb-3">
+          <label class="form-label">Image Link</label>
+          <input type="text" class="form-control" formControlName="blogImg">
+        </div>
+
+        
+        <hr>
+        
+        <div *ngIf="sections.controls && sections.controls.length == 0">Required minimum one section!</div>
+        
+        <!-- Sections -->
+        <div formArrayName="blogSections" *ngFor="let section of sections.controls; let i = index">
+          <div [formGroupName]="i" class="mb-3">
+            
+            <!-- Section Title -->
+            <div>
+              <label class="form-label">Section Title</label>
+              <input type="text" class="form-control" formControlName="sectionTitle">
+              <div *ngIf="sections.controls[i].get('sectionTitle')!.invalid" class="form-text">Title is required</div>
+            </div>
+            
+            <!-- Section Description -->
+            <div>
+              <label class="form-label">Section Description</label>
+              <textarea type="textarea" class="form-control" formControlName="sectionDesc" rows="3"></textarea>
+              <div *ngIf="sections.controls[i].get('sectionDesc')!.invalid" class="form-text">Description is required</div>
+            </div>
+            
+            <!-- Section Image Link -->
+            <div>
+              <label class="form-label">Section Image</label>
+              <input type="text" class="form-control" formControlName="sectionImg">
+            </div>
+            
+            <!-- Section Image preview -->
+            <div *ngIf="sections.controls[i].get('sectionImg')">
+              <img [src]="sections.controls[i].get('sectionImg')!.value" alt="">
+            </div>
+            
+            <!-- Delete Button -->
+            <button type="button" class="btn btn-danger mt-2" (click)="deleteSection(i)">Delete Section</button>
+
+          </div>
+        </div>
+
+        <div class="d-flex gap-3 mt-2">
+          <!-- Add section button -->
+          <button type="button" class="btn btn-success" (click)="onAddSection()">Add Section</button>
+
+          <!-- Form Submit button -->
+          <button type="submit" class="btn btn-primary" [disabled]="editBlogForm.invalid">Update</button>
+        </div>
+      </form>
+</div>

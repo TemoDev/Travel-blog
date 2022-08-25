@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as authActions from '../store/auth.actions';
 import * as fromApp from '../../store/app.reducer';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Blog } from 'src/app/shared/blog.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +16,10 @@ export class LoginComponent implements OnInit {
   innerWidth!: number;
   loginForm!: FormGroup;
   errorMessage!: string | null;
-  constructor(private afAuth: AngularFireAuth, private store: Store<fromApp.AppState>, private router:Router) { }
+
+  userBlogs: Blog[] = [];
+  constructor(private afAuth: AngularFireAuth, private store: Store<fromApp.AppState>, private router:Router, private db: AngularFirestore) {
+  }
 
   ngOnInit(): void {
     // Get initial viewport size
@@ -32,17 +37,25 @@ export class LoginComponent implements OnInit {
   }
 
   onFormSubmit() {
-    console.log(this.loginForm);
+    
+    // Read Form Values
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
+    
+    // Reset Form
     this.loginForm.reset();
+    
+    // Sign in
     this.afAuth.signInWithEmailAndPassword(email, password).then(result => {
-      console.log(result);
+
+      // Save data in Dashboard Store
       this.store.dispatch(authActions.setUser({email: result.user!.email, uid: result.user!.uid}));
       this.router.navigate(['/home']);
+
     }).catch(err => {
       this.errorMessage = err.message;
-    })  }
+    })  
+  }
 
   closeToast() {
     document.querySelector('.toast')?.classList.replace('show','hide');

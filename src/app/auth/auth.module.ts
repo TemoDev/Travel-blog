@@ -8,6 +8,7 @@ import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { StoreModule } from "@ngrx/store";
 import { authReducer } from './store/auth.reducer';
+import { AngularFireModule } from "@angular/fire/compat";
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { authReducer } from './store/auth.reducer';
         ReactiveFormsModule,
         AngularFireAuthModule,
         AuthRoutingModule,
+        AngularFireModule,
         StoreModule.forFeature('auth', authReducer)
     ],
     exports: [],

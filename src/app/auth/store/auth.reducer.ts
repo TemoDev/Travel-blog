@@ -6,14 +6,12 @@ export interface State {
     isAuthenticated: boolean;
     uid: string | null;
     email: string | null;
-    myBlog: [] | null;
 }
 
 const initialState: State = {
     isAuthenticated: false,
     email: null,
     uid: null,
-    myBlog: null
 }
 
 export const authReducer = createReducer(
