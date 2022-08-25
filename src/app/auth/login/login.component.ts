@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 
       // Save data in Dashboard Store
       this.store.dispatch(authActions.setUser({email: result.user!.email, uid: result.user!.uid}));
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard']);
 
     }).catch(err => {
       this.errorMessage = err.message;
