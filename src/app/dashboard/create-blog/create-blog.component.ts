@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Blog } from 'src/app/shared/blog.model';
 import * as fromApp from "../../store/app.reducer";
-import * as dashboardActions from '../store/dashboard.actions';
+import * as UIActions from "../../ui/store/ui.actions";
 
 @Component({
   selector: 'app-create-blog',
@@ -49,7 +49,7 @@ export class CreateBlogComponent implements OnInit {
     });
   }
 
-  // Button action to add sections 
+  // Button action to add sections in form 
   onAddSection() {
     const sectionForm = new FormGroup({
       sectionTitle: new FormControl(null, [Validators.required]),
@@ -95,6 +95,9 @@ export class CreateBlogComponent implements OnInit {
     // Reset Form and remove section controls
     this.createBlogForm.reset();
     this.sections.controls = [];
+    
+    // Send message to App 
+    this.store.dispatch(UIActions.setStatusMessage({message: "Blog has been successfully created and published!"}));
   }
 
 }

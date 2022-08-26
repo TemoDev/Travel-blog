@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as authActions from '../store/auth.actions';
 import * as fromApp from '../../store/app.reducer';
+import * as UIActions from '../../ui/store/ui.actions';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Blog } from 'src/app/shared/blog.model';
 @Component({
@@ -51,7 +52,8 @@ export class LoginComponent implements OnInit {
       // Save data in Dashboard Store
       this.store.dispatch(authActions.setUser({email: result.user!.email, uid: result.user!.uid}));
       this.router.navigate(['/dashboard']);
-
+      // Successfuly logged in
+      this.store.dispatch(UIActions.setStatusMessage({message: "You have been successfully logged in!"}));
     }).catch(err => {
       this.errorMessage = err.message;
     })  

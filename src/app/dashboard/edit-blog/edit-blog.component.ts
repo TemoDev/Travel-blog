@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { from, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Blog } from 'src/app/shared/blog.model';
 import * as fromApp from '../../store/app.reducer';
+import * as UIActions from '../../ui/store/ui.actions';
 
 @Component({
   selector: 'app-edit-blog',
@@ -118,6 +119,9 @@ export class EditBlogComponent implements OnInit {
       this.descSub?.unsubscribe();
       // Reset Form and remove section controls
       this.sections.controls = [];
+      
+      // Send message to app
+      this.store.dispatch(UIActions.setStatusMessage({message: "Blog has been successfully edited!"}));
     }
 
 }

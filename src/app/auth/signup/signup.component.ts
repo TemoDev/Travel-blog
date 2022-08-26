@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import * as fromAuth from '../store/auth.reducer';
 import * as authActions from '../store/auth.actions';
+import * as UIActions from '../../ui/store/ui.actions';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -53,6 +54,8 @@ export class SignupComponent implements OnInit {
 
       this.store.dispatch(authActions.setUser({email: result.user!.email,uid: result.user!.uid}));
       this.router.navigate(['/dashboard']);
+      this.store.dispatch(UIActions.setStatusMessage({message: "You have been successfully signed up!"}));
+
     }).catch(err => {
       this.errorMessage = err.message;
       console.log(this.errorMessage)
