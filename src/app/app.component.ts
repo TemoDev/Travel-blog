@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Blog } from './shared/blog.model';
 
+import { map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as UIActions from './ui/store/ui.actions';
 import * as fromApp from './store/app.reducer';
+import * as blogsActions from './shared/store/blogs.action';
+
 
 @Component({
   selector: 'app-root',
@@ -14,7 +19,7 @@ export class AppComponent implements OnInit {
 
   statusMessage: string | null = null;
 
-  constructor(private store: Store<fromApp.AppState>){}
+  constructor(private store: Store<fromApp.AppState>, private db: AngularFirestore){}
 
   ngOnInit(): void {
     this.store.select(fromApp.getStatusMessage).subscribe(res => {
@@ -26,7 +31,21 @@ export class AppComponent implements OnInit {
           this.statusMessage = null;
         }, 2500);
       }
+    });
+
+    this.db.collection('blogs').snapshotChanges().pipe(
+      map((result) => {
+        return result.map(doc => {
+          return {
+              blogId: doc.payload.doc.id,
+              ...doc.payload.doc.data() as Blog,
+          }
+      })      
     })
+    ).subscribe((blogs: Blog[]) => {
+      this.store.dispatch(blogsActions.getBlogs({blogs: blogs}));
+    })
+
   }
 
 }

@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { BlogComponent } from './blog/blog.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
@@ -15,7 +14,7 @@ import { appReducer } from './store/app.reducer';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ContactComponent } from './contact/contact.component';
-import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    BlogComponent,
     BlogDetailComponent,
     ContactComponent,
   ],

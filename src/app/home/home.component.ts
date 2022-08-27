@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Blog } from '../shared/blog.model';
+import * as fromApp from "../store/app.reducer";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  blogs$: Blog[] = [];
 
-  ngOnInit(): void {
+  constructor(private store: Store<fromApp.AppState>) { }
+
+  ngOnInit() {
+    this.store.select(fromApp.getAllBlogs);
   }
 
 }

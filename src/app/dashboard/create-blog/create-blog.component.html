@@ -26,6 +26,9 @@
           <input type="text" class="form-control" formControlName="blogImg">
         </div>
 
+        <div *ngIf="createBlogForm.get('blogImg')!.value">
+          <img class="img-fluid mt-3" [src]="createBlogForm.get('blogImg')!.value" alt="Img">
+        </div>
         
         <hr>
         
@@ -56,8 +59,8 @@
             </div>
             
             <!-- Section Image preview -->
-            <div *ngIf="sections.controls[i].get('sectionImg')">
-              <img [src]="sections.controls[i].get('sectionImg')!.value" alt="">
+            <div *ngIf="sections.controls[i].get('sectionImg')!.value">
+              <img class="img-fluid mt-3" [src]="sections.controls[i].get('sectionImg')!.value" alt="img">
             </div>
             
             <!-- Delete Button -->

@@ -4,7 +4,7 @@
 </div>
 
 <div class="container-xxl pb-5 pt-2" *ngIf="isAuthenticated">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
         <h1 class="display-4 fw-bold">Dashboard</h1>
             <button class="btn btn-success">
                 <a class="text-light text-decoration-none" routerLink="new">Add new blog</a>
@@ -23,8 +23,8 @@
     </div>
 
     <!-- Blogs -->
-    <div class="d-flex gap-3 mt-3">
-      <div class="card" style="width: 25rem;" *ngFor="let blog of (userBlogs$ | async)">
+    <div class="d-flex gap-3 mt-3 flex-wrap justify-content-around justify-content-xl-start">
+      <div class="card" style="max-width: 25rem; width: 100%;" *ngFor="let blog of (userBlogs$ | async)">
         <div *ngIf="blog.bgImg">
           <img [src]="blog.bgImg" class="card-img-top" [alt]="blog.title">
         </div>
