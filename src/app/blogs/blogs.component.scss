@@ -1,11 +1,13 @@
 .card{
     width: 100%;
-    box-shadow: 8.0px 16.0px 16.0px hsl(0deg 0% 0% / 0.25);
-    transition: all .3s ease-in-out;
+    transition: all .25s ease-in-out;
 
     &:hover{
-        box-shadow: 4.0px 8.0px 8.0px hsl(0deg 0% 0% / 0.38);
-
+        box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+        0 2px 2px hsl(0deg 0% 0% / 0.075),
+        0 4px 4px hsl(0deg 0% 0% / 0.075),
+        0 8px 8px hsl(0deg 0% 0% / 0.075),
+        0 16px 16px hsl(0deg 0% 0% / 0.075);
     }
 }
 .blog{

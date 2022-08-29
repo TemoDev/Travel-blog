@@ -1,5 +1,5 @@
 <!-- Status message -->
-<div [ngClass]="statusMessage ? 'show' : 'hide'" class="toast d-flex align-items-center justify-content-center hide text-white bg-success border-0 fade" role="alert" aria-live="assertive" aria-atomic="true">
+<div [ngClass]="statusMessage ? 'show' : 'hide'" class="toast hide text-white bg-success border-0 fade" role="alert" aria-live="assertive" aria-atomic="true">
  <div class="d-flex justify-content-center">
    <div class="toast-body">
      {{ statusMessage }}
@@ -8,5 +8,6 @@
 </div>
 <!-- Navigation bar -->
 <app-header></app-header>
+<div style="height: 8vh;"></div>
 <!-- Components -->
 <router-outlet></router-outlet>

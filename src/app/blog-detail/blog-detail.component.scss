@@ -1,0 +1,31 @@
+.blog-detail-intro{
+    height: 50vh;
+    width: 100%;
+    color: black;
+}
+
+.blog-detail-intro-with-img{
+    height: 92vh;
+    color: white;
+}
+
+.blog-detail-img{
+    height: 92vh;
+    width: 100vw;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    img {
+        opacity: .6;
+    }
+}
+.blog-section {
+    width: 100%;
+}
+
+@media screen and(min-width: 768px) {
+    .blog-section{
+        width: 75%;
+    }
+}

@@ -117,9 +117,6 @@ export class EditBlogComponent implements OnInit {
       // Remove subscription from counting each charachter of blog title and description
       this.titlSub?.unsubscribe();
       this.descSub?.unsubscribe();
-      // Reset Form and remove section controls
-      this.sections.controls = [];
-      
       // Send message to app
       this.store.dispatch(UIActions.setStatusMessage({message: "Blog has been successfully edited!"}));
     }

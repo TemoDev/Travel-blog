@@ -1,1 +1,22 @@
-<p>blog-detail works!</p>
+<!-- Intro section -->
+<div class="blog-detail-intro position-relative w-100 d-flex align-items-center" [ngClass]="(blog$| async)?.bgImg ? 'blog-detail-intro-with-img' : ''">
+    <div *ngIf="(blog$| async)?.bgImg" class="blog-detail-img bg-black">
+        <img style="object-fit: cover;" class="w-100 h-100" [src]="(blog$| async)?.bgImg" [alt]="(blog$| async)?.title">
+    </div>
+    <div class="container-xxl d-flex flex-column justify-content-center align-items-center position-realtive" style="z-index: 100;">
+        <h1 class="fw-bold display-3 text-center">{{ (blog$| async)?.title }}</h1>
+        <p class="text-center mt-3 w-50">{{ (blog$ | async)?.description }}</p>
+    </div>
+</div>
+
+<div class="container-xxl my-5 pt-5">
+    <section class="mb-4" *ngFor="let section of (blog$ | async)?.Sections">
+        <div class="mx-auto blog-section">
+            <h1 class="fw-bold">{{section.sectionTitle}}</h1>
+            <p>{{section.sectionDesc}}</p>
+        </div>
+        <div *ngIf="section.sectionImg" class="mt-5">
+            <img style="object-fit: cover;" class="w-100 h-100" [src]="section.sectionImg" [alt]="section.sectionTitle">
+        </div>
+    </section>
+</div>

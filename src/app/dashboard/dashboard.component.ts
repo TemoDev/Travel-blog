@@ -3,11 +3,12 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
 import * as authActions from '../auth/store/auth.actions';
 import * as dashboardActions from './store/dashboard.actions';
+import * as UIActions from '../ui/store/ui.actions';
+import * as blogActions from '../shared/store/blogs.action';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { DashboardService } from './dashboard.service';
 import { Blog } from '../shared/blog.model';
 import { Observable, Subscription } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>, 
     private afAuth: AngularFireAuth, 
     private dashboardService: DashboardService,
-    private router: Router  
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +49,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.afAuth.signOut().then((res) => {
       this.store.dispatch(authActions.removeUser());
       this.store.dispatch(dashboardActions.clearUserBlogs());
+      this.store.dispatch(UIActions.setStatusMessage({message: "You have been logged out!"}))
       this.dashboardService.cancelSubscriptions();
     })
   }
@@ -57,6 +58,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   selectEditBlog(blog: Blog) {
     // Set selected edit blog in dashboard store
     this.store.dispatch(dashboardActions.selectEditBlog({blog: blog}));
+  }
+
+  toBlogDetail(blog: Blog) {
+    this.store.dispatch(blogActions.getSelectedBlog({blog: blog}));
   }
 
   ngOnDestroy(): void {

@@ -1,1 +1,62 @@
-<p>contact works!</p>
+<div class="contact-bg">
+    <div class="contact-img bg-black">
+        <img style="object-fit: cover;" class="w-100 h-100" src="../../assets/contacts-bg.jpg" alt="Contacts bg">
+    </div>
+    <div class="container-xxl">
+        <div class="row">
+            <div class="col-md-6 mb-5 mb-md-0 d-flex flex-column justify-content-center">
+                <h1 class="display-2 mb-4 fw-bold">Contact</h1>
+                <!-- Phone -->
+                <span class="d-flex align-items-center gap-3 mb-3">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_93_8)">
+                        <path d="M9.93 16.185C12.09 20.43 15.57 23.895 19.815 26.07L23.115 22.77C23.52 22.365 24.12 22.23 24.645 22.41C26.325 22.965 28.14 23.265 30 23.265C30.825 23.265 31.5 23.94 31.5 24.765V30C31.5 30.825 30.825 31.5 30 31.5C15.915 31.5 4.5 20.085 4.5 6C4.5 5.175 5.175 4.5 6 4.5H11.25C12.075 4.5 12.75 5.175 12.75 6C12.75 7.875 13.05 9.675 13.605 11.355C13.77 11.88 13.65 12.465 13.23 12.885L9.93 16.185Z" fill="white"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_93_8">
+                        <rect width="36" height="36" fill="white"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+                        
+                    <p class="mb-0">+44 1234 567 890</p>
+                </span>
+                <!-- Email -->
+                <span class="d-flex align-items-center gap-3">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_93_11)">
+                        <path d="M30 6H6C4.35 6 3.015 7.35 3.015 9L3 27C3 28.65 4.35 30 6 30H30C31.65 30 33 28.65 33 27V9C33 7.35 31.65 6 30 6ZM30 12L18 19.5L6 12V9L18 16.5L30 9V12Z" fill="white"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_93_11">
+                        <rect width="36" height="36" fill="white"/>
+                        </clipPath>
+                        </defs>
+                    </svg>  
+                        
+                    <p class="mb-0">temo.kuliashvili@gmail.com</p>
+                </span>
+            </div>
+            <div class="col-md-6">
+                <form (ngSubmit)="onContactFormSubmit()" [formGroup]="contactForm">
+                    <!-- Email -->
+                    <div class="form-floating mb-3">
+                      <input formControlName="email" type="email" class="form-control bg-transparent text-white" id="floatingInput" placeholder="name@example.com">
+                      <label for="floatingInput">Email address</label>
+                    </div>
+                    <!-- Name -->
+                    <div class="form-floating mb-3">
+                      <input formControlName="name" type="text" class="form-control bg-transparent text-white" id="floatingName" placeholder="Josh">
+                      <label for="floatingPassword">Name</label>
+                    </div>
+                    <!-- Text -->
+                    <div class="form-floating mb-4">
+                        <textarea formControlName="message" class="form-control bg-transparent text-white" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Message</label>
+                      </div>
+                    <button type="submit" class="btn btn-secondary px-5 py-3 text-white">Contact Us</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

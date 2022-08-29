@@ -13,7 +13,6 @@ import { appReducer } from './store/app.reducer';
 // Firebase services + environment module
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { ContactComponent } from './contact/contact.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { BlogDetailComponent } from './blog-detail/blog-detail.component';
     FooterComponent,
     HomeComponent,
     BlogDetailComponent,
-    ContactComponent,
   ],
   imports: [
     BrowserModule,

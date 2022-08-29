@@ -20,8 +20,8 @@ export class BlogsComponent implements OnInit {
     this.blogs$ = this.store.select(fromApp.getAllBlogs);
   }
 
-  toBlogDetail(id: string | undefined) {
-    this.store.dispatch(blogsActions.getSelectedBlog({blogId: id}));
+  toBlogDetail(selectedBlog: Blog) {
+    this.store.dispatch(blogsActions.getSelectedBlog({blog: selectedBlog}));
   }
 
 }

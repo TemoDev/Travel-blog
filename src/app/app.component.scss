@@ -1,9 +1,15 @@
 .toast{
-    position: sticky;
+    position: absolute;
     top: 0;
     left: 50%;
     margin-top: 2vh;
     min-height: 6vh;
     transform: translateX(-50%);
     z-index: 20000;
+}
+
+.show{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

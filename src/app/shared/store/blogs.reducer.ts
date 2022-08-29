@@ -5,7 +5,7 @@ import * as blogsActions from './blogs.action';
 
 export interface State {
     blogs: Blog[];
-    selectedBlog: string | null | undefined;
+    selectedBlog: Blog | null;
 }
 
 const initialState: State = {
@@ -19,7 +19,7 @@ export const blogsReducer = createReducer(
         return {...state, blogs: action.blogs};
     }),
     on(blogsActions.getSelectedBlog, (state, action) => {
-        return { ...state, selectedBlog: action.blogId };
+        return { ...state, selectedBlog: action.blog };
     }),
     on(blogsActions.removeSelectedBlog, (state) => {
         return {...state, selectedBlog: null};

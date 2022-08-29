@@ -2,7 +2,7 @@
 <div class="blogs-intro position-relative">
     <div class="container-xxl h-100 d-flex flex-column justify-content-center align-items-center">
         <h1 class="fw-bold text-white display-2">Travel Blog</h1>
-        <p class="text-white text-center mt-3 w-50">Travel and explore the world with different bloggers from all around the world.</p>
+        <p class="text-white text-center mt-3 w-50">Explore the world with different bloggers from all around the world.</p>
         <svg class="position-absolute" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"style="bottom:0; left: 50%; transform: translateX(-50%);">
             <g clip-path="url(#clip0_76_4)">
             <path d="M33.18 17.18L24 26.34L14.82 17.18L12 20L24 32L36 20L33.18 17.18Z" fill="white"/>
@@ -16,17 +16,17 @@
     </div>
 </div>
 <!-- Blogs Section -->
-<div class="container-xxl my-5 d-flex flex-wrap gap-4" id="blogs">
-        <a *ngFor="let blog of (blogs$ | async)" routerLink="../blog-detail" (click)="toBlogDetail(blog.blogId)" class="text-decoration-none text-black d-flex blog" style="cursor: pointer">
-            <div class="card border-0">
+<div class="container-xxl my-5 d-flex flex-wrap gap-4 justify-content-center" id="blogs">
+        <a *ngFor="let blog of (blogs$ | async)" routerLink="../blog-detail" (click)="toBlogDetail(blog)" class="text-decoration-none text-black d-flex blog" style="cursor: pointer">
+            <div class="card">
               <div *ngIf="blog.bgImg">
                 <img [src]="blog.bgImg" class="card-img-top" [alt]="blog.title">
               </div>
               <div class="card-body text-center" [ngClass]="!blog.bgImg ? 'd-flex flex-column' : ''">
-                  <div class="my-3" [ngClass]="!blog.bgImg ? 'my-auto' : ''">
+                <div class="my-3" [ngClass]="!blog.bgImg ? 'my-auto' : ''">
                     <p class="text-primary text-bold mb-1" style="font-weight: 600;">Destinations</p>
-                  <h5 class="card-title fw-bold">{{ blog.title }}</h5>
-                  <p class="card-text text-muted">{{ blog.description }}</p>
+                    <h5 class="card-title fw-bold">{{ blog.title }}</h5>
+                    <p class="card-text text-muted">{{ blog.description }}</p>
                 </div>
               </div>
             </div>

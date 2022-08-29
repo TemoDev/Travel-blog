@@ -1,0 +1,21 @@
+.contact-bg{
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: white;
+    min-height: 92vh;
+    color: white;
+    width: 100%;
+}
+
+.contact-img{
+    height: 100%;
+    width: 100vw;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    img {
+        opacity: .6;
+    }
+}

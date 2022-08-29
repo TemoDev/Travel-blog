@@ -5,16 +5,17 @@ import { BlogDetailGuard } from './blog-detail/blog-detail.guard';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'home'},
-  {path: 'home', component: HomeComponent},
+  { path: '', pathMatch: 'full', redirectTo: 'home'},
+  { path: 'home', component: HomeComponent},
   { path:'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   { path:'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
   { path: 'blogs', loadChildren: () => import('./blogs/blogs.module').then(m => m.BlogsModule) },
-  { path: 'blog-detail', component: BlogDetailComponent, canActivate: [BlogDetailGuard]}
+  { path: 'blog-detail', component: BlogDetailComponent, canActivate: [BlogDetailGuard]},
+  { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
