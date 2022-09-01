@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { DashboardService } from './dashboard.service';
 import { Blog } from '../shared/blog.model';
 import { Observable, Subscription } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>, 
     private afAuth: AngularFireAuth, 
     private dashboardService: DashboardService,
+    private db: AngularFirestore
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +64,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   toBlogDetail(blog: Blog) {
     this.store.dispatch(blogActions.getSelectedBlog({blog: blog}));
+  }
+
+  // Delete Blog
+  deleteBlog(blogId: string | undefined) {
+    this.db.collection('users').doc(this.userUid).collection('userBlogs').doc(blogId).delete().then(() => {
+      this.db.collection('blogs').doc(blogId).delete();
+      this.store.dispatch(UIActions.setStatusMessage({message: "Blog has been Deleted"}))
+    });
   }
 
   ngOnDestroy(): void {

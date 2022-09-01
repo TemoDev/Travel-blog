@@ -10,6 +10,7 @@ export class Blog {
             sectionImg: string | null,
         }[],
         public creator?: string,
+        public creatorImg?: string,
         public blogId?: string,
         ) {}
 }

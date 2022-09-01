@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(fromApp.getStatusMessage).subscribe(res => {
       if(res) {
-        console.log(res);
         this.statusMessage = res;
         setTimeout(() => {
           this.store.dispatch(UIActions.setStatusMessage({message: null}));

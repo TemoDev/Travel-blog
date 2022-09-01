@@ -1,2 +1,71 @@
-<p>home works!</p>
-<p>The Travel Blog Site, Create free travel blogs to share with friends, family and the world. Join the World's Friendliest Travel Community.</p>
+<div class="home-bg mb-5">
+    <div class="home-inner">
+        <div class="container-xxl text-white position-relative h-100 d-flex align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-2 fw-bold" style="line-height: 100%;">Mother Earth Hosts Our Travels</h1>
+                <p class="my-5">The Travel Blog Site, Create free travel blogs to share with friends, family and the world. Join the World's Friendliest Travel Community.</p>
+                <a routerLink="../blogs" class="btn btn-secondary px-5 py-3 text-white" style="font-weight: 600;">Explore the world</a>
+            </div>
+            <!-- Arrow -->
+            <svg class="position-absolute" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"style="bottom:0; left: 12px;">
+                <g clip-path="url(#clip0_76_4)">
+                <path d="M33.18 17.18L24 26.34L14.82 17.18L12 20L24 32L36 20L33.18 17.18Z" fill="white"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_76_4">
+                <rect width="48" height="48" fill="white" transform="translate(48 48) rotate(-180)"/>
+                </clipPath>
+                </defs>
+            </svg>  
+        </div>
+    </div>
+</div>
+
+<!-- Features Photos Section -->
+<section class="container-xxl my-5 py-5">
+    <h1 class="display-1 mb-5" style="font-weight: 600;">Featured Photos</h1>
+    <!-- Photo gallery -->
+    <div class="d-flex justify-content-around gap-3 flex-wrap">
+        <div class="photo-card rounded-1" *ngFor="let photo of blogsArr">
+            <img class="w-100 h-100" style="object-fit: cover;" [src]="photo.bgImg" [alt]="photo.title">
+            <div class="photo-overlay p-4">
+                <p class="text-white fw-bold">{{ photo.title }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Inspirations section -->
+<section *ngIf="blogsArr.length != 0" class="min-vh-100 mt-5 py-5 position-relative">
+    <div class="position-absolute h-100 w-100" style="bottom: 0; left:0; z-index: -10;">
+        <img class="w-100 h-100" style="object-fit:cover;" [src]="blogsArr[0].bgImg" [alt]="blogsArr[0].title">
+    </div>
+    <div class="position-absolute h-100 w-100" style="bottom: 0; left:0; z-index: -1; background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(6,6,102,0) 0%, rgba(0,0,0,0.7) 100%);"></div>
+    <div class="container-xxl">
+        <div class="d-flex flex-wrap min-vh-100">
+            <div class="col-md-6 mb-5 mb-md-0 d-flex flex-column justify-content-center justify-content-md-end pe-2">
+                <h1 class="display-5 fw-bold text-white" style="line-height: 100%;">{{ blogsArr[0].title }}</h1>
+                <p class="text-white my-4">{{blogsArr[0].description}}</p>
+                <div>
+                    <a routerLink="../blog-detail" class="btn btn-primary text-uppercase text-white rounded-1 py-4 px-5 d-inline-block" style="font-weight:600;" (click)="toBlogDetail(blogsArr[0])">read article</a>
+                </div>
+            </div>
+            <!-- Second column bg -->
+            <div class="story-feature-dark-bg bg-dark"></div>
+            <div class="col-md-6 px-md-5 mt-5 mt-md-0 d-flex flex-column justify-content-center">
+                <h1 class="display-4 fw-bold text-white">Featured Stories</h1>
+                <!-- Other featured Blogs  -->
+                <div class="py-5 pb-md-0">
+                    <a routerLink="../blog-detail" (click)="toBlogDetail(blog)" class="btn btn-dark d-flex py-3 text-white featured-story-link" *ngFor="let blog of blogsArr">
+                        <img style="width: 2rem; height: 2rem;" class="me-3" *ngIf="blog.creatorImg" [src]="blog.creatorImg" alt="Icon">
+                        <img style="width: 2rem; height: 2rem;" class="me-3" *ngIf="!blog.creatorImg" src="../../assets/test-account.png" alt="Icon">
+                        <div>
+                            <p class="text-start fw-bolder mb-1">{{blog.title}}</p>
+                            <p class="text-start text-muted mb-1">{{blog.createdAt.toDate() | date}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
