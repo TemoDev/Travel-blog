@@ -9,12 +9,14 @@ import { SignupComponent } from "./signup/signup.component";
 import { StoreModule } from "@ngrx/store";
 import { authReducer } from './store/auth.reducer';
 import { AngularFireModule } from "@angular/fire/compat";
+import { SpinnerComponent } from "../ui/spinner/spinner.component";
 
 @NgModule({
     declarations: [
         AuthComponent,
         LoginComponent,
-        SignupComponent
+        SignupComponent,
+        SpinnerComponent
     ],
     imports: [
         CommonModule,

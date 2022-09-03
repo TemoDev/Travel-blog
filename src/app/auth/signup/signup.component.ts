@@ -1,12 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as fromAuth from '../store/auth.reducer';
+import * as fromApp from '../../store/app.reducer';
 import * as authActions from '../store/auth.actions';
 import * as UIActions from '../../ui/store/ui.actions';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -17,8 +18,11 @@ export class SignupComponent implements OnInit {
   innerWidth!: number;
   signupForm!: FormGroup;
   errorMessage!: string | null;
+  isLoading$!: Observable<boolean>;
 
-  constructor(private afAuth: AngularFireAuth, private store: Store<fromAuth.State>, private router: Router, private db: AngularFirestore) { }
+  constructor(private afAuth: AngularFireAuth, private store: Store<fromApp.AppState>, private router: Router, private db: AngularFirestore) { 
+    this.isLoading$ = this.store.select(fromApp.getIsLoading);
+  }
 
   ngOnInit(): void {
     // Find initial width of the viewport
@@ -37,6 +41,9 @@ export class SignupComponent implements OnInit {
   onFormSubmit() {
     console.log(this.signupForm);
     
+    // Start loading
+    this.store.dispatch(UIActions.startLoading());
+
     // Get Form data
     const email = this.signupForm.value.email;
     const password = this.signupForm.value.password;
@@ -53,12 +60,13 @@ export class SignupComponent implements OnInit {
       })
 
       this.store.dispatch(authActions.setUser({email: result.user!.email,uid: result.user!.uid}));
+      this.store.dispatch(UIActions.stopLoading());
       this.router.navigate(['/dashboard']);
       this.store.dispatch(UIActions.setStatusMessage({message: "You have been successfully signed up!"}));
 
     }).catch(err => {
+      this.store.dispatch(UIActions.stopLoading());
       this.errorMessage = err.message;
-      console.log(this.errorMessage)
     })
   }
 

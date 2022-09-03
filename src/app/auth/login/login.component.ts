@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import * as authActions from '../store/auth.actions';
 import * as fromApp from '../../store/app.reducer';
 import * as UIActions from '../../ui/store/ui.actions';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Blog } from 'src/app/shared/blog.model';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +19,11 @@ export class LoginComponent implements OnInit {
   errorMessage!: string | null;
 
   userBlogs: Blog[] = [];
-  constructor(private afAuth: AngularFireAuth, private store: Store<fromApp.AppState>, private router:Router, private db: AngularFirestore) {
+
+  isLoading$!: Observable<boolean>;
+
+  constructor(private afAuth: AngularFireAuth, private store: Store<fromApp.AppState>, private router:Router) {
+    this.isLoading$ = this.store.select(fromApp.getIsLoading);
   }
 
   ngOnInit(): void {
@@ -39,6 +43,9 @@ export class LoginComponent implements OnInit {
 
   onFormSubmit() {
     
+    // Start loading
+    this.store.dispatch(UIActions.startLoading());
+
     // Read Form Values
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
@@ -51,10 +58,12 @@ export class LoginComponent implements OnInit {
 
       // Save data in Dashboard Store
       this.store.dispatch(authActions.setUser({email: result.user!.email, uid: result.user!.uid}));
+      this.store.dispatch(UIActions.stopLoading());
       this.router.navigate(['/dashboard']);
       // Successfuly logged in
       this.store.dispatch(UIActions.setStatusMessage({message: "You have been successfully logged in!"}));
     }).catch(err => {
+      this.store.dispatch(UIActions.stopLoading());
       this.errorMessage = err.message;
     })  
   }

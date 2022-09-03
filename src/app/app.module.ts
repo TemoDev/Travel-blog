@@ -14,6 +14,7 @@ import { appReducer } from './store/app.reducer';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { SpinnerComponent } from './ui/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BlogDetailComponent } from './blog-detail/blog-detail.component';
     FooterComponent,
     HomeComponent,
     BlogDetailComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
