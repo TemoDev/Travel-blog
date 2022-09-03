@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import * as auth from 'firebase/auth';
 import * as fromApp from '../../store/app.reducer';
 import * as authActions from '../store/auth.actions';
 import * as UIActions from '../../ui/store/ui.actions';
@@ -59,7 +60,7 @@ export class SignupComponent implements OnInit {
         email: result.user?.email,
       })
 
-      this.store.dispatch(authActions.setUser({email: result.user!.email,uid: result.user!.uid}));
+      this.store.dispatch(authActions.setUser({email: result.user!.email,uid: result.user!.uid, userPhoto: result.user?.photoURL}));
       this.store.dispatch(UIActions.stopLoading());
       this.router.navigate(['/dashboard']);
       this.store.dispatch(UIActions.setStatusMessage({message: "You have been successfully signed up!"}));
@@ -73,6 +74,25 @@ export class SignupComponent implements OnInit {
   closeToast() {
     document.querySelector('.toast')?.classList.replace('show','hide');
     this.errorMessage = null;
+  }
+
+  signUpWithGoogle() {
+    this.afAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(result => {
+
+      // Create user data in firestore
+      this.db.collection('users').doc(result.user?.uid).set({
+        email: result.user?.email,
+      })
+
+      this.store.dispatch(authActions.setUser({email: result.user!.email,uid: result.user!.uid, userPhoto: result.user?.photoURL}));
+      this.store.dispatch(UIActions.stopLoading());
+      this.router.navigate(['/dashboard']);
+      this.store.dispatch(UIActions.setStatusMessage({message: "You have been successfully signed up!"}));
+
+    }).catch(err => {
+      this.store.dispatch(UIActions.stopLoading());
+      this.errorMessage = err.message;
+    })
   }
 
 }

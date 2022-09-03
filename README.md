@@ -7,10 +7,8 @@ This project was generated with Angular version 14.
 - Firebase(Angularfire)
     - Firebase Authentication
     - Firebase Firestore
-    - Firebase Storage
 - NgRx
 - Bootstrap
-- GSAP
 
 ## Features
 - Sign in w/ email/password & Google 

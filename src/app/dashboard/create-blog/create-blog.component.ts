@@ -24,11 +24,13 @@ export class CreateBlogComponent implements OnInit {
 
   private userUid: string | any;
   private userEmail: string | any;
+  private userPhoto: string | any;
   // private userSubscription!: Subscription;
   constructor(private store: Store<fromApp.AppState>, private db: AngularFirestore) {
     this.store.select('auth').subscribe(val => {
       this.userUid = val.uid;
       this.userEmail = val.email;
+      this.userPhoto = val.userPhoto
     });
 
   }
@@ -74,6 +76,7 @@ export class CreateBlogComponent implements OnInit {
     
     // Create Blog 
     const blog: Blog = {
+      creatorImg: this.userPhoto,
       creator: this.userEmail,
       createdAt: new Date,
       title: this.createBlogForm.value.blogTitle,

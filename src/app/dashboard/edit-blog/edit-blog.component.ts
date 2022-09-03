@@ -26,6 +26,9 @@ export class EditBlogComponent implements OnInit {
   // Subscriptions
   titlSub!: Subscription | undefined;
   descSub!: Subscription | undefined;
+
+  validImg: boolean = false;
+
   constructor(
     private store: Store<fromApp.AppState>, 
     private db: AngularFirestore) {
@@ -37,7 +40,7 @@ export class EditBlogComponent implements OnInit {
         blogSections: new FormArray([], [Validators.required])
       });
       
-    }
+  }
     
     ngOnInit(): void {
 

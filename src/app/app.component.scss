@@ -1,8 +1,7 @@
 .toast{
-    position: absolute;
-    top: 0;
+    position: sticky;
+    top: 2vh;
     left: 50%;
-    margin-top: 2vh;
     min-height: 6vh;
     transform: translateX(-50%);
     z-index: 20000;

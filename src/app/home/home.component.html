@@ -57,8 +57,8 @@
                 <!-- Other featured Blogs  -->
                 <div class="py-5 pb-md-0">
                     <a routerLink="../blog-detail" (click)="toBlogDetail(blog)" class="btn btn-dark d-flex py-3 text-white featured-story-link" *ngFor="let blog of blogsArr">
-                        <img style="width: 2rem; height: 2rem;" class="me-3" *ngIf="blog.creatorImg" [src]="blog.creatorImg" alt="Icon">
-                        <img style="width: 2rem; height: 2rem;" class="me-3" *ngIf="!blog.creatorImg" src="../../assets/test-account.png" alt="Icon">
+                        <img style="width: 2rem; height: 2rem; border-radius: 50%;" class="me-3" *ngIf="blog.creatorImg" [src]="blog.creatorImg" alt="Icon">
+                        <img style="width: 2rem; height: 2rem; border-radius: 50%;" class="me-3" *ngIf="!blog.creatorImg" src="../../assets/test-account.png" alt="Icon">
                         <div>
                             <p class="text-start fw-bolder mb-1">{{blog.title}}</p>
                             <p class="text-start text-muted mb-1">{{blog.createdAt.toDate() | date}}</p>

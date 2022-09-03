@@ -14,11 +14,16 @@
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
       <label for="floatingPassword">Password</label>
-      <div *ngIf="!signupForm.get('password')!.valid && signupForm.get('password')!.touched" id="emailHelp" class="form-text">Password minimum lenght should be 6!</div>
+      <div *ngIf="!signupForm.get('password')!.valid && signupForm.get('password')!.touched" id="emailHelp" class="form-text">Password must contain minimum 6 charachters!</div>
     </div>
     <button [disabled]="signupForm.invalid" type="submit" class="btn btn-primary rounded-3 mt-5 mb-3 fw-bolder px-5"s>Sign Up</button>
   </form>
-<a routerLink="../login">Already have an account?</a>
+  
+  <!-- Google auth btn -->
+  <button (click)="signUpWithGoogle()" class="login-with-google-btn my-3">Sign up with Google</button>
+  <br>
+  <!-- Login? -->
+  <a routerLink="../login">Already have an account?</a>
 </div>
 
 <!-- Error message -->
