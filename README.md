@@ -18,19 +18,21 @@ This project was generated with Angular version 14.
 
 ## Development
 
-Clone this project
+1) Clone this project
 
 ```
     git clone https://github.com/TemoDev/Travel-blog.git
 ```
 
-Download dependencies
+2) Download dependencies
 
 ```
     npm install
 ```
 
-Run the project
+3) Add Firebase credentials in environment.ts file
+
+4) Run the project
 
 ```
     ng serve
