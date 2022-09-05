@@ -54,7 +54,7 @@ export class CreateBlogComponent implements OnInit {
   // Button action to add sections in form 
   onAddSection() {
     const sectionForm = new FormGroup({
-      sectionTitle: new FormControl(null, [Validators.required]),
+      sectionTitle: new FormControl(null),
       sectionDesc: new FormControl(null, [Validators.required]),
       sectionImg: new FormControl(null),
     });

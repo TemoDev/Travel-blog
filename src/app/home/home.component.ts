@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.store.select(fromApp.getAllBlogs).subscribe(res => {
       res.forEach(el => {
-          if(this.blogsArr.length < 5 && el.bgImg) {
+          if(this.blogsArr.length < 4 && el.bgImg) {
             this.blogsArr.push(el);
           }
         })

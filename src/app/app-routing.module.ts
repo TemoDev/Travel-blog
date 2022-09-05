@@ -11,7 +11,8 @@ const routes: Routes = [
   { path:'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
   { path: 'blogs', loadChildren: () => import('./blogs/blogs.module').then(m => m.BlogsModule) },
   { path: 'blog-detail', component: BlogDetailComponent, canActivate: [BlogDetailGuard]},
-  { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)}
+  { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)},
+  { path: '**', redirectTo: 'home'}
 ];
 
 @NgModule({
